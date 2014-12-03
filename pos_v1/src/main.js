@@ -9,8 +9,8 @@ function getallnumbers(inputs){
   var itemNumber = [];
   for ( var j=0 ; j<loadAllItems().length ; j++){
     itemNumber[j] = 0;
-    
   }
+
   for (var i=0 ; i<inputs.length ; i++){
     var input = inputs[i].split('-');
     itemNumber = getnumber (itemNumber,input) ;

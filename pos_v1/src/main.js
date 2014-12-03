@@ -16,12 +16,12 @@ var promotions = loadPromotions() ;
 function printInventory(inputs){
   var allnumbers = getallnumbers(inputs);
   var allmenu = getallmenu(allnumbers);
-  return allmenu;
+  console.log(allmenu);
 }
 
 
-allmenu = printInventory(inputs);
-console.log(allmenu);
+//allmenu = printInventory(inputs);
+
 
 
 function getallnumbers(inputs){
@@ -29,7 +29,7 @@ function getallnumbers(inputs){
   for ( var j=0 ; j<items.length ; j++){
     itemNumber[j] = 0;
   }
-console.log(itemNumber);
+//console.log(itemNumber);
   for (var i=0 ; i<inputs.length ; i++){
     var input = inputs[i].split('-');
     if (input.length ===  2){
@@ -49,7 +49,7 @@ console.log(itemNumber);
       }
     }
   }
-console.log(itemNumber);
+//console.log(itemNumber);
   return itemNumber;
 }
 
@@ -108,11 +108,6 @@ function nofreemenu(i,allnumbers){
 }
 
 
-
-
-
-
-
 function getmenu2(allnumbers){
   var menu2 = '' ;
   for ( var i=0 ; i<allnumbers.length ; i++){
@@ -125,6 +120,24 @@ function getmenu2(allnumbers){
 }
 
 
+
+
+
+
 function getmenu3(allnumbers){
-  return '16574984512\n' ;
+  var allsum = 0;
+  var loadsum = 0;
+  for ( var i=0 ; i<allnumbers.length ; i++){
+    if (allnumbers[i]!=0 && load(i)){
+      allsum += items[i].price*(allnumbers[i]-parseInt(allnumbers[i]/3)) ;
+      loadsum += items[i].price*parseInt(allnumbers[i]/3);
+    }
+    else {
+      allsum += items[i].price*allnumbers[i] ;
+    }
+  }
+
+  var menu3 = '总计：' + allsum.toFixed(2) + '(元)\n' +
+              '节省：' + loadsum.toFixed(2) + '(元)\n';
+  return menu3 ;
 }

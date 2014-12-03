@@ -16,7 +16,7 @@ var promotions = loadPromotions() ;
 function printInventory(inputs){
   var allnumbers = getallnumbers(inputs);
   var allmenu = getallmenu(allnumbers);
-return allmenu;
+  return allmenu;
 }
 
 
@@ -116,9 +116,9 @@ function nofreemenu(i,allnumbers){
 function getmenu2(allnumbers){
   var menu2 = '' ;
   for ( var i=0 ; i<allnumbers.length ; i++){
-    if (allnumbers[i]!=0 || load(i)){
+    if (allnumbers[i]!=0 && load(i)){
       menu2 += '名称：' + items[i].name +
-               '，数量：' +allnumbers[i] + items[i].unit + '\n' ;
+               '，数量：' + parseInt(allnumbers[i]/3) + items[i].unit + '\n' ;
     }
   }
   return menu2 ;

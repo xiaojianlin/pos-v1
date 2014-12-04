@@ -11,20 +11,28 @@ function getallnumbers(inputs){
     itemNumber[j] = 0;
   }
 
-  for (var i=0 ; i<inputs.length ; i++){
-    var input = inputs[i].split('-');
+  _.forEach(inputs,function(trg){
+    var input = trg.split('-');
     itemNumber = getnumber (itemNumber,input) ;
-  }
+  })
   return itemNumber;
 }
 
 
 function getnumber (itemNumber,input){
+
+  // _.forEach( loadAllItems(),function(trg){
+  //   if(input[0] === trg[a].barcode){
+  //     (input.length ===  2) ? (itemNumber[a] += parseInt(input[1])):
+  //                             (itemNumber[a]++) ;
+  //   }
+  //
+  // })
   for ( var a=0 ; a<loadAllItems().length ; a++){
     if(input[0] === loadAllItems()[a].barcode){
       (input.length ===  2) ? (itemNumber[a] += parseInt(input[1])):
                               (itemNumber[a]++) ;
-        }
+    }
   }
   return itemNumber;
 }
@@ -61,11 +69,12 @@ function getmenu1(allnumbers){
 
 function load(i){
   var loads = false ;
-  for(var a=0 ; a<loadPromotions()[0].barcodes.length ; a++){
-    if(loadAllItems()[i].barcode === loadPromotions()[0].barcodes[a]){
-       loads = true ;
+
+  _.forEach( loadPromotions()[0].barcodes,function(trg){
+    if(loadAllItems()[i].barcode === trg ){
+      loads = true ;
     }
-  }
+  })
   return loads ;
 }
 

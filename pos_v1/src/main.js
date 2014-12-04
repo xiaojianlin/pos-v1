@@ -7,9 +7,10 @@ function printInventory(inputs){
 
 function getallnumbers(inputs){
   var itemNumber = [];
-  for ( var j=0 ; j<loadAllItems().length ; j++){
-    itemNumber[j] = 0;
-  }
+  _.forEach(loadAllItems(),function(allnumber,index){
+    itemNumber[index] = 0;
+  })
+
 
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
@@ -20,18 +21,14 @@ function getallnumbers(inputs){
 
 
 function getnumber (itemNumber,input){
-
   _.forEach( loadAllItems(),function(trg,index) {
     if(input[0] === trg.barcode){
      itemNumber[index] = getItemNumber(itemNumber[index],input);
-      // (input.length ===  2) ? itemNumber[index] += parseInt(input[1]):
-      //                         itemNumber[index]++ ;
      }
-
   });
-
   return itemNumber;
 }
+
 
 function getItemNumber(number,input) {
   (input.length === 2) ? number += parseInt(input[1]):number++ ;

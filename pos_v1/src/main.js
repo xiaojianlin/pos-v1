@@ -23,27 +23,20 @@ function getnumber (itemNumber,input){
 
   _.forEach( loadAllItems(),function(trg,index) {
     if(input[0] === trg.barcode){
-    //  itemNumber[index] = getItemNumber(itemNumber[index],input);
-      (input.length ===  2) ? itemNumber[index] += parseInt(input[1]):
-                              itemNumber[index]++ ;
+     itemNumber[index] = getItemNumber(itemNumber[index],input);
+      // (input.length ===  2) ? itemNumber[index] += parseInt(input[1]):
+      //                         itemNumber[index]++ ;
      }
 
   });
-  //
-  // for ( var a=0 ; a<loadAllItems().length ; a++){
-  //   if(input[0] === loadAllItems()[a].barcode){
-  //     (input.length === 2) ? itemNumber[a] += parseInt(input[1]):
-  //                            itemNumber[a]++ ;
-  //   }
-  // }
+
   return itemNumber;
 }
-//
-// function getItemNumber(number,input) {
-//
-//   (input.length === 2) ? number += parseInt(input[1]):number++ ;
-//   return number;
 
+function getItemNumber(number,input) {
+  (input.length === 2) ? number += parseInt(input[1]):number++ ;
+  return number;
+}
 
 
 function getallmenu(allnumbers){
@@ -62,7 +55,6 @@ function getmenu1(allnumbers){
   var menu1 = '' ;
   var number = 0 ;
   _.forEach(allnumbers,function(allnumber,index){
-  //for ( var i=0 ; i<allnumbers.length ; i++){
       if (allnumber!==0){
       load(index) ? number = allnumber - parseInt(allnumber/3) :
                 number = allnumber;

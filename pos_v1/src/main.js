@@ -4,49 +4,52 @@ function printInventory(inputs){
   console.log(allmenu);
 }
 
-function foundAllNumber(){
-  var itemNumber = [] ;
-  _.forEach(loadAllItems(),function(allnumber,index){
-    itemNumber[index] = 0;
-  });
-  return itemNumber ;
-}
 
 function getleadnumbers(inputs){
-  var itemNumber = foundAllNumber() ;
-  _.forEach(inputs,function(trg){
-    var input = trg.split('-');
-    itemNumber = getnumber (itemNumber,input) ;
+  var leadNumber = foundLeadNumber() ;
+  _.forEach(inputs,function(inputs){
+    var input = inputs.split('-');
+    leadNumber = addLeadNumber (leadNumber,input) ;
   });
-  return itemNumber;
+  return leadNumber;
 }
 
 
-function getnumber (itemNumber,input){
+function foundLeadNumber(){
+  var leadNumber = [] ;
+  _.forEach(loadAllItems(),function(number,index){
+    leadNumber[index] = 0;
+  });
+  return leadNumber ;
+}
+
+
+function addLeadNumber (leadNumber,input){
   _.forEach( loadAllItems(),function(trg,index) {
     if(input[0] === trg.barcode){
-     itemNumber[index] = getItemNumber(itemNumber[index],input);
+      leadNumber[index] = diffInputs(leadNumber[index],input);
      }
   });
-  return itemNumber;
+  return leadNumber;
 }
 
 
-function getItemNumber(number,input) {
-  (input.length === 2) ? number += parseInt(input[1]):number++ ;
+function diffInputs(number,input) {
+  (input.length === 2) ? number += parseInt(input[1]):
+                         number++ ;
   return number;
 }
 
 
 function getallmenu(leadNumbers){
-  return menu = '***<没钱赚商店>购物清单***\n' +
-                getmenu1(leadNumbers) +
-                '----------------------\n' +
-                '挥泪赠送商品：\n' +
-                getmenu2(leadNumbers) +
-                '----------------------\n' +
-                getmenu3(leadNumbers) +
-                '**********************' ;
+  return menus = '***<没钱赚商店>购物清单***\n' +
+                 getmenu1(leadNumbers) +
+                 '----------------------\n' +
+                 '挥泪赠送商品：\n' +
+                 getmenu2(leadNumbers) +
+                 '----------------------\n' +
+                 getmenu3(leadNumbers) +
+                 '**********************' ;
 }
 
 

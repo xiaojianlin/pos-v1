@@ -9,7 +9,7 @@ function getallnumbers(inputs){
   var itemNumber = [];
   _.forEach(loadAllItems(),function(allnumber,index){
     itemNumber[index] = 0;
-  })
+  });
 
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
@@ -53,7 +53,7 @@ function getmenu1(allnumbers){
   _.forEach(allnumbers,function(allnumber,index){
       if (allnumber!==0){
       load(index) ? number = allnumber - parseInt(allnumber/3) :
-                number = allnumber;
+                number = allnumber ;
       menu1 += '名称：' + loadAllItems()[index].name +
                 '，数量：' +allnumber + loadAllItems()[index].unit +
                 '，单价：' + loadAllItems()[index].price.toFixed(2) +
@@ -88,17 +88,21 @@ function getmenu2(allnumbers){
 
 
 function getmenu3(allnumbers){
-  var allsum = 0;
-  var loadsum = 0;
+  var allsums = 0;
+  var loadsums = 0;
   _.forEach(allnumbers,function(allnumber,index){
+    // (allnumber!==0 && load(index)) ? (allsum += loadAllItems()[index].price*(allnumber-parseInt(allnumber/3)) ;
+    //                                     loadsum += loadAllItems()[index].price*parseInt(allnumber/3) ) :
+    //                                  allsum += loadAllItems()[index].price*allnumber ;
+    var sum = loadAllItems()[index].price ;
       if (allnumber!==0 && load(index)){
-        allsum += loadAllItems()[index].price*(allnumber-parseInt(allnumber/3)) ;
-        loadsum += loadAllItems()[index].price*parseInt(allnumber/3);
+        allsums += sum*(allnumber-parseInt(allnumber/3)) ;
+        loadsums += sum*parseInt(allnumber/3);
       }
       else {
-        allsum += loadAllItems()[index].price*allnumber ;
+        allsums += sum*allnumber ;
       }
-  });
-  return menu3 = '总计：' + allsum.toFixed(2) + '(元)\n' +
-                 '节省：' + loadsum.toFixed(2) + '(元)\n' ;
+  } )
+  return menu3 = '总计：' + allsums.toFixed(2) + '(元)\n' +
+                 '节省：' + loadsums.toFixed(2) + '(元)\n' ;
 }

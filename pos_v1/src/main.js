@@ -83,12 +83,6 @@ function getmenu2(allnumbers){
                '，数量：' + parseInt(allnumber/3) + loadAllItems()[index].unit + '\n' ;
     }
   });
-  // for ( var i=0 ; i<allnumbers.length ; i++){
-  //   if (allnumbers[i]!==0 && load(i)){
-  //     menu2 += '名称：' + loadAllItems()[i].name +
-  //              '，数量：' + parseInt(allnumbers[i]/3) + loadAllItems()[i].unit + '\n' ;
-  //   }
-  // }
   return menu2 ;
 }
 
@@ -96,15 +90,15 @@ function getmenu2(allnumbers){
 function getmenu3(allnumbers){
   var allsum = 0;
   var loadsum = 0;
-  for ( var i=0 ; i<allnumbers.length ; i++){
-    if (allnumbers[i]!==0 && load(i)){
-      allsum += loadAllItems()[i].price*(allnumbers[i]-parseInt(allnumbers[i]/3)) ;
-      loadsum += loadAllItems()[i].price*parseInt(allnumbers[i]/3);
-    }
-    else {
-      allsum += loadAllItems()[i].price*allnumbers[i] ;
-    }
-  }
+  _.forEach(allnumbers,function(allnumber,index){
+      if (allnumber!==0 && load(index)){
+        allsum += loadAllItems()[index].price*(allnumber-parseInt(allnumber/3)) ;
+        loadsum += loadAllItems()[index].price*parseInt(allnumber/3);
+      }
+      else {
+        allsum += loadAllItems()[index].price*allnumber ;
+      }
+  });
   return menu3 = '总计：' + allsum.toFixed(2) + '(元)\n' +
                  '节省：' + loadsum.toFixed(2) + '(元)\n' ;
 }

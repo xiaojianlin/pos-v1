@@ -11,7 +11,6 @@ function getallnumbers(inputs){
     itemNumber[index] = 0;
   })
 
-
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
     itemNumber = getnumber (itemNumber,input) ;
@@ -78,12 +77,18 @@ function load(i){
 
 function getmenu2(allnumbers){
   var menu2 = '' ;
-  for ( var i=0 ; i<allnumbers.length ; i++){
-    if (allnumbers[i]!==0 && load(i)){
-      menu2 += '名称：' + loadAllItems()[i].name +
-               '，数量：' + parseInt(allnumbers[i]/3) + loadAllItems()[i].unit + '\n' ;
+  _.forEach(allnumbers,function(allnumber,index){
+    if (allnumber !== 0 && load(index)){
+      menu2 += '名称：' + loadAllItems()[index].name +
+               '，数量：' + parseInt(allnumber/3) + loadAllItems()[index].unit + '\n' ;
     }
-  }
+  });
+  // for ( var i=0 ; i<allnumbers.length ; i++){
+  //   if (allnumbers[i]!==0 && load(i)){
+  //     menu2 += '名称：' + loadAllItems()[i].name +
+  //              '，数量：' + parseInt(allnumbers[i]/3) + loadAllItems()[i].unit + '\n' ;
+  //   }
+  // }
   return menu2 ;
 }
 

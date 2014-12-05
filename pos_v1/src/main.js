@@ -4,7 +4,7 @@ function printInventory(inputs){
   console.log(allmenu);
 }
 
-function getItemNumbers(){
+function foundAllNumber(){
   var itemNumber = [] ;
   _.forEach(loadAllItems(),function(allnumber,index){
     itemNumber[index] = 0;
@@ -13,7 +13,7 @@ function getItemNumbers(){
 }
 
 function getallnumbers(inputs){
-  var itemNumber = getItemNumbers() ;
+  var itemNumber = foundAllNumber() ;
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
     itemNumber = getnumber (itemNumber,input) ;
@@ -91,18 +91,18 @@ function getmenu2(allnumbers){
 
 
 function getmenu3(allnumbers){
-  var allsums = 0;
-  var loadsums = 0;
-  _.forEach(allnumbers,function(allnumber,index){
-    var sum = loadAllItems()[index].price ;
-      if (allnumber!==0 && load(index)){
-        allsums += sum*(allnumber-parseInt(allnumber/3)) ;
-        loadsums += sum*parseInt(allnumber/3);
+  var allMoney = 0;
+  var reduceMoney = 0;
+  _.forEach(allnumbers,function(number,index){
+    var price = loadAllItems()[index].price ;
+      if (number!==0 && load(index)){
+        allMoney += price*(number-parseInt(number/3)) ;
+        reduceMoney += price*parseInt(number/3);
       }
       else {
-        allsums += sum*allnumber ;
+        allMoney += price*number ;
       }
   } )
-  return menu3 = '总计：' + allsums.toFixed(2) + '(元)\n' +
-                 '节省：' + loadsums.toFixed(2) + '(元)\n' ;
+  return menu3 = '总计：' + allMoney.toFixed(2) + '(元)\n' +
+                 '节省：' + reduceMoney.toFixed(2) + '(元)\n' ;
 }

@@ -4,13 +4,16 @@ function printInventory(inputs){
   console.log(allmenu);
 }
 
-
-function getallnumbers(inputs){
-  var itemNumber = [];
+function getItemNumbers(){
+  var itemNumber = [] ;
   _.forEach(loadAllItems(),function(allnumber,index){
     itemNumber[index] = 0;
   });
+  return itemNumber ;
+}
 
+function getallnumbers(inputs){
+  var itemNumber = getItemNumbers() ;
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
     itemNumber = getnumber (itemNumber,input) ;
@@ -59,7 +62,7 @@ function getmenu1(allnumbers){
                 '，单价：' + loadAllItems()[index].price.toFixed(2) +
                 '(元)，小计：' + (loadAllItems()[index].price*number).toFixed(2) + '(元)\n' ;
       }
-    });
+  });
   return menu1 ;
 }
 
@@ -91,9 +94,6 @@ function getmenu3(allnumbers){
   var allsums = 0;
   var loadsums = 0;
   _.forEach(allnumbers,function(allnumber,index){
-    // (allnumber!==0 && load(index)) ? (allsum += loadAllItems()[index].price*(allnumber-parseInt(allnumber/3)) ;
-    //                                     loadsum += loadAllItems()[index].price*parseInt(allnumber/3) ) :
-    //                                  allsum += loadAllItems()[index].price*allnumber ;
     var sum = loadAllItems()[index].price ;
       if (allnumber!==0 && load(index)){
         allsums += sum*(allnumber-parseInt(allnumber/3)) ;

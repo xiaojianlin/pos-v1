@@ -1,6 +1,6 @@
 function printInventory(inputs){
-  var allnumbers = getallnumbers(inputs);
-  var allmenu = getallmenu(allnumbers);
+  var leadNumbers = getleadnumbers(inputs);
+  var allmenu = getallmenu(leadNumbers);
   console.log(allmenu);
 }
 
@@ -12,7 +12,7 @@ function foundAllNumber(){
   return itemNumber ;
 }
 
-function getallnumbers(inputs){
+function getleadnumbers(inputs){
   var itemNumber = foundAllNumber() ;
   _.forEach(inputs,function(trg){
     var input = trg.split('-');
@@ -38,29 +38,30 @@ function getItemNumber(number,input) {
 }
 
 
-function getallmenu(allnumbers){
+function getallmenu(leadNumbers){
   return menu = '***<没钱赚商店>购物清单***\n' +
-                getmenu1(allnumbers) +
+                getmenu1(leadNumbers) +
                 '----------------------\n' +
                 '挥泪赠送商品：\n' +
-                getmenu2(allnumbers) +
+                getmenu2(leadNumbers) +
                 '----------------------\n' +
-                getmenu3(allnumbers) +
+                getmenu3(leadNumbers) +
                 '**********************' ;
 }
 
 
-function getmenu1(allnumbers){
+function getmenu1(leadNumbers){
   var menu1 = '' ;
-  var number = 0 ;
-  _.forEach(allnumbers,function(allnumber,index){
-      if (allnumber!==0){
-      load(index) ? number = allnumber - parseInt(allnumber/3) :
-                number = allnumber ;
-      menu1 += '名称：' + loadAllItems()[index].name +
-                '，数量：' +allnumber + loadAllItems()[index].unit +
-                '，单价：' + loadAllItems()[index].price.toFixed(2) +
-                '(元)，小计：' + (loadAllItems()[index].price*number).toFixed(2) + '(元)\n' ;
+  var numbers = 0 ;
+  _.forEach(leadNumbers,function(number,index){
+      if (number!==0){
+      load(index) ? numbers = number - parseInt(number/3) :
+                numbers = number ;
+      var itemindex = loadAllItems()[index] ;
+      menu1 += '名称：' + itemindex.name +
+                '，数量：' +number + itemindex.unit +
+                '，单价：' + itemindex.price.toFixed(2) +
+                '(元)，小计：' + (itemindex.price*numbers).toFixed(2) + '(元)\n' ;
       }
   });
   return menu1 ;
@@ -78,22 +79,22 @@ function load(i){
 }
 
 
-function getmenu2(allnumbers){
+function getmenu2(leadNumbers){
   var menu2 = '' ;
-  _.forEach(allnumbers,function(allnumber,index){
-    if (allnumber !== 0 && load(index)){
+  _.forEach(leadNumbers,function(number,index){
+    if (number !== 0 && load(index)){
       menu2 += '名称：' + loadAllItems()[index].name +
-               '，数量：' + parseInt(allnumber/3) + loadAllItems()[index].unit + '\n' ;
+               '，数量：' + parseInt(number/3) + loadAllItems()[index].unit + '\n' ;
     }
   });
   return menu2 ;
 }
 
 
-function getmenu3(allnumbers){
+function getmenu3(leadNumbers){
   var allMoney = 0;
   var reduceMoney = 0;
-  _.forEach(allnumbers,function(number,index){
+  _.forEach(leadNumbers,function(number,index){
     var price = loadAllItems()[index].price ;
       if (number!==0 && load(index)){
         allMoney += price*(number-parseInt(number/3)) ;

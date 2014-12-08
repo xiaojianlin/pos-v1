@@ -1,11 +1,11 @@
 function printInventory(inputs){
-  var leadNumbers = getleadnumbers(inputs);
-  var allmenu = getallmenu(leadNumbers);
+  var leadNumbers = getLeadNumbers(inputs);
+  var allmenu = getAllMenu(leadNumbers);
   console.log(allmenu);
 }
 
 
-function getleadnumbers(inputs){
+function getLeadNumbers(inputs){
   var leadNumber = foundLeadNumber() ;
   _.forEach(inputs,function(inputs){
     var input = inputs.split('-');
@@ -36,12 +36,12 @@ function addLeadNumber (leadNumber,input){
 
 function diffInputs(number,input) {
   (input.length === 2) ? number += parseInt(input[1]):
-                         number++ ;
+                         number++;
   return number;
 }
 
 
-function getallmenu(leadNumbers){
+function getAllMenu(leadNumbers){
   return menus = '***<没钱赚商店>购物清单***\n' +
                  getmenu1(leadNumbers) +
                  '----------------------\n' +
@@ -73,7 +73,7 @@ function getmenu1(leadNumbers){
 
 function load(i){
   var loads = false ;
-  _.forEach( loadPromotions()[0].barcodes,function(trg){
+  _.forEach( loadPromotions()[0].barcodes, function(trg){
     if(loadAllItems()[i].barcode === trg ){
       loads = true ;
     }
@@ -106,7 +106,7 @@ function getmenu3(leadNumbers){
       else {
         allMoney += price*number ;
       }
-  } )
+  } ) ;
   return menu3 = '总计：' + allMoney.toFixed(2) + '(元)\n' +
                  '节省：' + reduceMoney.toFixed(2) + '(元)\n' ;
 }

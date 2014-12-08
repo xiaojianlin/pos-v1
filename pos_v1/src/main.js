@@ -17,14 +17,14 @@ function getLeadNumbers(inputs){
 
 function foundLeadNumber(){
   var leadNumber = [] ;
-  _.forEach(loadAllItems(),function(number,index){
+  _.forEach(loadAllItems(),function(number, index){
     leadNumber[index] = 0;
   });
   return leadNumber ;
 }
 
 
-function addLeadNumber (leadNumber,input){
+function addLeadNumber (leadNumber, input){
   _.forEach( loadAllItems(),function(trg,index) {
     if(input[0] === trg.barcode){
       leadNumber[index] = diffInputs(leadNumber[index],input);
@@ -36,7 +36,7 @@ function addLeadNumber (leadNumber,input){
 
 function diffInputs(number,input) {
   (input.length === 2) ? number += parseInt(input[1]):
-                         number++;
+                         number++ ;
   return number;
 }
 
@@ -56,7 +56,7 @@ function getAllMenu(leadNumbers){
 function getmenu1(leadNumbers){
   var menu1 = '' ;
   var numbers = 0 ;
-  _.forEach(leadNumbers,function(number,index){
+  _.forEach(leadNumbers,function(number, index){
       if (number!==0){
       load(index) ? numbers = number - parseInt(number/3) :
                 numbers = number ;
@@ -84,7 +84,7 @@ function load(i){
 
 function getmenu2(leadNumbers){
   var menu2 = '' ;
-  _.forEach(leadNumbers,function(number,index){
+  _.forEach(leadNumbers,function(number, index){
     if (number !== 0 && load(index)){
       menu2 += '名称：' + loadAllItems()[index].name +
                '，数量：' + parseInt(number/3) + loadAllItems()[index].unit + '\n' ;
@@ -97,7 +97,7 @@ function getmenu2(leadNumbers){
 function getmenu3(leadNumbers){
   var allMoney = 0;
   var reduceMoney = 0;
-  _.forEach(leadNumbers,function(number,index){
+  _.forEach(leadNumbers,function(number, index){
     var price = loadAllItems()[index].price ;
       if (number!==0 && load(index)){
         allMoney += price*(number-parseInt(number/3)) ;
